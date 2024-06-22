@@ -1,0 +1,78 @@
+configuration {
+  display-drun: "Applications:";
+  display-window: "Windows:";
+  drun-display-format: "{icon} {name}";
+  font: "Noto Sans Regular 11";
+  modi: "window,run,drun";
+  show-icons: true;
+  icon-theme: "Papirus-dark";
+}
+
+@theme "/dev/null"
+
+* {
+  fg: #FFFFFF;
+  bg: rgba(17, 18, 29, 0.6); // #11121D
+  bg-title: rgba(34, 34, 34, 0.6); // #222222
+  background-color: @bg;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+}
+
+window {
+  width: 45%;
+  border-radius: 10px;
+}
+
+element {
+  padding: 8 0;
+  text-color: #787c99;
+}
+
+element selected {
+  text-color: @fg;
+  font-weight: bold;
+  font-size: 14;
+  background-color: #2E3440;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 35;
+}
+
+entry {
+  background-color: @bg-title;
+  padding: 12;
+  text-color: @fg;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+listview {
+  padding: 8 12;
+  background-color: @bg;
+  columns: 1;
+  lines: 8;
+}
+
+mainbox {
+  background-color: @bg;
+  children: [inputbar, listview];
+}
+
+prompt {
+  background-color: @bg-title;
+  enabled: true;
+  padding: 12 0 0 12;
+  text-color: @fg;
+}
