@@ -157,7 +157,7 @@ local tasklist_buttons = gears.table.join(
   end))
 
 awful.screen.connect_for_each_screen(function(s)
-  awful.tag({ "1", "2" }, s, awful.layout.layouts[9])
+  awful.tag({ "1", "2" }, s, awful.layout.layouts[2])
   awful.tag({ "3", "4", "5" }, s, awful.layout.layouts[1])
   awful.tag({ "6", "7" }, s, awful.layout.layouts[10])
   awful.tag({ "8", "9" }, s, awful.layout.layouts[11])
@@ -221,6 +221,15 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+  awful.key({ modkey, "Shift" }, "Right", function() awful.client.moveresize(20, 0, 0, 0) end,
+    { description = "move window right", group = "client" }),
+  awful.key({ modkey, "Shift" }, "Left", function() awful.client.moveresize(-20, 0, 0, 0) end,
+    { description = "move window left", group = "client" }),
+  awful.key({ modkey, "Shift" }, "Down", function() awful.client.moveresize(0, 20, 0, 0) end,
+    { description = "move window down", group = "client" }),
+  awful.key({ modkey, "Shift" }, "Up", function() awful.client.moveresize(0, -20, 0, 0) end,
+    { description = "move window up", group = "client" }),
+
   awful.key({ modkey, }, "s", hotkeys_popup.show_help,
     { description = "show help", group = "awesome" }),
   awful.key({ modkey, }, "Left", awful.tag.viewprev,
@@ -425,6 +434,7 @@ root.keys(globalkeys)
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
+  -- All clients will match this rule.
   {
     rule = {},
     properties = {
@@ -435,21 +445,52 @@ awful.rules.rules = {
       keys = clientkeys,
       buttons = clientbuttons,
       screen = awful.screen.preferred,
-      placement = awful.placement.no_overlap + awful.placement.no_offscreen
+      placement = awful.placement.no_overlap + awful.placement.no_offscreen,
+      titlebars_enabled = false
     }
   },
+
+  -- Floating clients.
   {
     rule_any = {
+      instance = {
+        "DTA",   -- Firefox addon DownThemAll.
+        "copyq", -- Includes session name in class.
+        "pinentry",
+      },
       class = {
-        "Nvigator",
-        "Nitrogen"
+        "Arandr",
+        "Blueman-manager",
+        "Gpick",
+        "Kruler",
+        "MessageWin",  -- kalarm.
+        "Sxiv",
+        "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+        "Wpa_gui",
+        "veromix",
+        "xtightvncviewer" },
+
+      -- Note that the name property shown in xprop might be set slightly after creation of the client
+      -- and the name shown there might not match defined rules here.
+      name = {
+        "Event Tester", -- xev.
       },
       role = {
-        "pop-up"
+        "AlarmWindow",   -- Thunderbird's calendar.
+        "ConfigManager", -- Thunderbird's about:config.
+        "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
       }
     },
     properties = { floating = true }
   },
+
+  -- Add titlebars to normal clients and dialogs
+  {
+    rule_any = { type = { "normal", "dialog" }
+    },
+    properties = { titlebars_enabled = true }
+  },
+
   {
     rule = { class = "floorp" },
     properties = { screen = 1, tag = "3" },
@@ -491,31 +532,6 @@ client.connect_signal("request::titlebars", function(c)
       awful.mouse.client.resize(c)
     end)
   )
-
-  awful.titlebar(c):setup {
-    { -- Left
-      awful.titlebar.widget.iconwidget(c),
-      buttons = buttons,
-      layout  = wibox.layout.fixed.horizontal
-    },
-    {   -- Middle
-      { -- Title
-        align  = "center",
-        widget = awful.titlebar.widget.titlewidget(c)
-      },
-      buttons = buttons,
-      layout  = wibox.layout.flex.horizontal
-    },
-    { -- Right
-      awful.titlebar.widget.floatingbutton(c),
-      awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton(c),
-      awful.titlebar.widget.ontopbutton(c),
-      awful.titlebar.widget.closebutton(c),
-      layout = wibox.layout.fixed.horizontal()
-    },
-    layout = wibox.layout.align.horizontal
-  }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.

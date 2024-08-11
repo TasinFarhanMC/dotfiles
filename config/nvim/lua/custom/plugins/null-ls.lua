@@ -18,8 +18,9 @@ return {
       command! NullLsFormat lua vim.lsp.buf.format({ async = true, name = 'null-ls' })
     ]]
 
-    function _G.format_or_null_ls()
-      local clients = vim.lsp.get_active_clients()
+    function _G.format()
+      local lspconfig = require "lspconfig"
+      local clients = lspconfig.util.get_lsp_clients()
       local has_lsp_formatting = false
 
       for _, client in ipairs(clients) do
@@ -36,6 +37,6 @@ return {
       end
     end
 
-    vim.api.nvim_set_keymap('n', 'E', '<cmd>lua format_or_null_ls()<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', 'E', '<cmd>lua format()<CR>', { noremap = true, silent = true })
   end
 }

@@ -16,7 +16,6 @@ return {
     local keymap = vim.keymap
     keymap.set('n', "<leader>d", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
     keymap.set('n', "<leader>D", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-    keymap.set('n', "<leader>r", ":NvimTreeRefresh<CR>", { noremap = true, silent = true })
     keymap.set('n', "<leader>w", ":wa<CR>", { noremap = true, silent = true })
     keymap.set('n', "<leader>x", ":qa!<CR>", { noremap = true, silent = true })
     keymap.set('n', "<leader>z", ":wqa<CR>", { noremap = true, silent = true })

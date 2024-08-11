@@ -8,8 +8,6 @@ return {
   },
   config = function()
     local lspconfig = require "lspconfig"
-    --local lsputil = lspconfig.util
-    local mason_lspconfig = require "mason-lspconfig"
     local cmp_nvim_lsp = require "cmp_nvim_lsp"
     local keymap = vim.keymap
 
@@ -29,7 +27,7 @@ return {
       keymap.set("n", "gT", "<cmd>vert botright split | Telescope lsp_type_definitions<CR>", opts)
       keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
       keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-      keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+      keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
     end
 
@@ -42,7 +40,7 @@ return {
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
     capabilities.textDocument.completion.completionItem = {
-      documentationFormat = { "markdown_inline", "plaintext" },
+      documentationFormat = { "markdown", "plaintext" },
       snippetSupport = true,
       preselectSupport = true,
       insertReplaceSupport = true,
@@ -64,34 +62,27 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup { capabilities = capabilities }
-      end,
-      ["clangd"] = function()
-        lspconfig.clangd.setup {
-          capabilities = capabilities,
-          cmd = { "clangd", "--completion-style=detailed" }
-        }
-      end,
-      ["lua_ls"] = function()
-        lspconfig.lua_ls.setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        })
-      end
-    })
+    lspconfig.clangd.setup {
+      capabilities = capabilities,
+      cmd = { "clangd", "--completion-style=detailed" }
+    }
 
-    require 'lspconfig'.rust_analyzer.setup {}
-    require 'lspconfig'.zls.setup {}
+    lspconfig.lua_ls.setup {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          completion = {
+            callSnippet = "Replace",
+          }
+        }
+      }
+    }
+
+    lspconfig.rust_analyzer.setup { capabilities = capabilities }
+    lspconfig.pyright.setup { capabilities = capabilities }
+    lspconfig.cmake.setup { capabilities = capabilities }
   end
 }

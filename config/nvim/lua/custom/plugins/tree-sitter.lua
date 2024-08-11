@@ -1,5 +1,3 @@
-local lang = require "custom/lang"
-
 return {
   "nvim-treesitter/nvim-treesitter",
   name = "treesitter",
@@ -9,10 +7,15 @@ return {
       incremental_selection = { enable = true },
       indent = { enable = true },
       sync_install = false,
-     -- ensure_installed = lang.parsers
+      ensure_installed = {
+        "c",
+        "cpp",
+        "python",
+        "bash",
+        "rust",
+        "zig"
+      }
     }
-
-    local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
   end,
 
   build = function()
