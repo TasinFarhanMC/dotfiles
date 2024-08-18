@@ -74,7 +74,7 @@ alias sortnr='sort -n -r'
 alias unexport='unset'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias pkgc='sudo pacman -R $(pacman -Qtdq)'
-alias src='source ${ZDOTDIR:-$HOME}/.zshrc'
+alias src='source ${ZDOTDIR:-$HOME}/.zshrc; source $HOME/.zshenv'
 
 alias vim='nvim'
 alias vi='nvim'
