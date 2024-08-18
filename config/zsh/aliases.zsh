@@ -40,9 +40,9 @@ alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 
-alias zshrc='$EDITOR $HOME/.zshrc'
-alias zshenv='$EDITOR $HOME/.zshenv'
-alias zshal='$EDITOR $HOME/.zshal'
+alias zenv='$EDITOR $HOME/.zshenv'
+alias zrc='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
+alias zals='$EDITOR ${ZDOTDIR:-$HOME}/aliases.zsh'
 
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
@@ -54,6 +54,7 @@ alias -g T='| tail'
 alias -g G='| grep'
 alias -g L="| less"
 alias -g M="| most"
+alias -g C="| clip"
 alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
