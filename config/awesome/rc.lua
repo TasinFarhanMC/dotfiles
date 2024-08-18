@@ -543,6 +543,11 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+local wallpaper_dir = os.getenv("WALLPAPER_DIR")
+if not wallpaper_dir then
+  print("Environment variable WALLPAPER_DIR is not set.")
+  os.exit(1)
+end
 
 local cmds = {
   "lxqt-policykit-agent",
@@ -551,7 +556,7 @@ local cmds = {
   "picom",
   "pnmixer",
   "flameshot",
-  "nitrogen --random --set-zoom-fill",
+  "feh --randomize --bg-fill " .. wallpaper_dir,
   terminal
 }
 
