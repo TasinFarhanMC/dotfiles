@@ -220,7 +220,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(
+GlobalKeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "Right", function() awful.client.moveresize(20, 0, 0, 0) end,
     { description = "move window right", group = "client" }),
   awful.key({ modkey, "Shift" }, "Left", function() awful.client.moveresize(-20, 0, 0, 0) end,
@@ -367,7 +367,7 @@ clientkeys = gears.table.join(
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-  globalkeys = gears.table.join(globalkeys,
+  GlobalKeys = gears.table.join(GlobalKeys,
     -- View tag only.
     awful.key({ modkey }, "#" .. i + 9,
       function()
@@ -426,10 +426,6 @@ clientbuttons = gears.table.join(
     awful.mouse.client.resize(c)
   end)
 )
-
--- Set keys
-root.keys(globalkeys)
--- }}}
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
@@ -545,9 +541,89 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 local wallpaper_dir = os.getenv("WALLPAPER_DIR")
 if not wallpaper_dir then
-  print("Environment variable WALLPAPER_DIR is not set.")
-  os.exit(1)
+  naughty.notify({
+    preset = naughty.config.presets.critical,
+    title = "Warning!",
+    text = "Wallpaper directory is not set [WALLPAPER_DIR]"
+  })
+else
+  local wallpapers = {}
+  local current_index = 0
+
+  -- Function to load wallpapers from directory
+  local function load_wallpapers()
+    wallpapers = {}
+
+    local handle = io.popen("ls " .. wallpaper_dir)
+    local result = ""
+
+    if handle then
+      result = handle:read("*a")
+      handle:close()
+    else
+      naughty.notify({
+        preset = naughty.config.presets.critical,
+        title = "Error!",
+        text = "Failed to list wallpapers in " .. wallpaper_dir
+      })
+      return false
+    end
+
+    -- Parse the output to get the file names
+    for file in string.gmatch(result, "[^\r\n]+") do
+      -- Optional: filter to ensure it's an image (e.g., PNG, JPG, WebP)
+      if file:match("^.+(%..+)$") then
+        table.insert(wallpapers, file)
+      end
+    end
+
+    if #wallpapers == 0 then
+      naughty.notify({
+        preset = naughty.config.presets.critical,
+        title = "Warning!",
+        text = "No valid wallpapers found in " .. wallpaper_dir
+      })
+      return false
+    end
+
+    return true
+  end
+
+  -- Function to set the next wallpaper
+  local function set_next_wallpaper()
+    if #wallpapers == 0 then
+      naughty.notify({
+        preset = naughty.config.presets.critical,
+        title = "Warning!",
+        text = "No wallpapers available to set."
+      })
+      return
+    end
+
+    current_index = (current_index % #wallpapers) + 1
+    local wallpaper = wallpapers[current_index]
+    awful.spawn.with_shell("feh --bg-fill " .. wallpaper_dir .. "/" .. wallpaper)
+  end
+
+  -- Load wallpapers and set the first one if successful
+  if load_wallpapers() then
+    set_next_wallpaper()
+
+    -- Timer to change wallpaper every X seconds
+    local wallpaper_timer = gears.timer({ timeout = 300 })
+    wallpaper_timer:connect_signal("timeout", function()
+      set_next_wallpaper()
+    end)
+    wallpaper_timer:start()
+  end
+
+
+  GlobalKeys = gears.table.join(GlobalKeys,
+    awful.key({ modkey }, "t", set_next_wallpaper,
+      { description = "set next queued wallpaper", group = "custom" })
+  )
 end
+
 
 local cmds = {
   "lxqt-policykit-agent",
@@ -556,10 +632,11 @@ local cmds = {
   "picom",
   "pnmixer",
   "flameshot",
-  "feh --randomize --bg-fill " .. wallpaper_dir,
   terminal
 }
 
 for _, cmd in ipairs(cmds) do
   awful.spawn.with_shell(cmd)
 end
+
+root.keys(GlobalKeys)

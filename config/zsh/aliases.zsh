@@ -78,7 +78,6 @@ alias src='source ${ZDOTDIR:-$HOME}/.zshrc; source $HOME/.zshenv'
 
 alias vim='nvim'
 alias vi='nvim'
-alias nivm='nvim'
 alias c='clear'
 alias cat='bat'
 alias gcc='clang'
