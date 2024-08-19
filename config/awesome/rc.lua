@@ -590,7 +590,7 @@ else
   end
 
   -- Function to set the next wallpaper
-  local function set_next_wallpaper()
+  local function set_wallpaper(step)
     if #wallpapers == 0 then
       naughty.notify({
         preset = naughty.config.presets.critical,
@@ -599,28 +599,29 @@ else
       })
       return
     end
-
-    current_index = (current_index % #wallpapers) + 1
+    current_index = (current_index - 1 + step) % #wallpapers + 1
     local wallpaper = wallpapers[current_index]
     awful.spawn.with_shell("feh --bg-fill " .. wallpaper_dir .. "/" .. wallpaper)
   end
 
   -- Load wallpapers and set the first one if successful
   if load_wallpapers() then
-    set_next_wallpaper()
+    set_wallpaper(math.random(1, #wallpapers))
 
     -- Timer to change wallpaper every X seconds
     local wallpaper_timer = gears.timer({ timeout = 300 })
     wallpaper_timer:connect_signal("timeout", function()
-      set_next_wallpaper()
+      set_wallpaper()
     end)
     wallpaper_timer:start()
   end
 
 
   GlobalKeys = gears.table.join(GlobalKeys,
-    awful.key({ modkey }, "t", set_next_wallpaper,
-      { description = "set next queued wallpaper", group = "custom" })
+    awful.key({ modkey }, "t", function() set_wallpaper(1) end,
+      { description = "set next queued wallpaper", group = "custom" }),
+    awful.key({ modkey, "Shift" }, "t", function() set_wallpaper(-1) end,
+      { description = "set previous queued wallpaper", group = "custom" })
   )
 end
 
