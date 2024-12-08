@@ -62,11 +62,6 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    lspconfig.clangd.setup {
-      capabilities = capabilities,
-      cmd = { "clangd", "--completion-style=detailed" }
-    }
-
     lspconfig.lua_ls.setup {
       capabilities = capabilities,
       settings = {
@@ -81,8 +76,20 @@ return {
       }
     }
 
+    lspconfig.clangd.setup { capabilities = capabilities }
     lspconfig.rust_analyzer.setup { capabilities = capabilities }
     lspconfig.pyright.setup { capabilities = capabilities }
     lspconfig.cmake.setup { capabilities = capabilities }
+    lspconfig.jsonls.setup { capabilities = capabilities }
+    lspconfig.yamlls.setup {
+      capabilities = capabilities,
+      settings = {
+        yaml = {
+          format = {
+            enable = true,
+          }
+        }
+      }
+    }
   end
 }

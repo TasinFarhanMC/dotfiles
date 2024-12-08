@@ -31,8 +31,6 @@ eval "$(oh-my-posh init zsh --config ${XDG_CONFIG_HOME:-${HOME/.config}}/oh-my-p
 eval "$(thefuck --alias f)"
 
 bindkey -v
-bindkey -M viins '^?' backward-delete-char
-bindkey -M viins '^[[3~' forward-delete-char
 bindkey -M viins '^k' history-search-forward
 bindkey -M viins '^j' history-search-backward
 bindkey -M vicmd 'k' history-search-forward
@@ -41,7 +39,7 @@ bindkey '^@' autosuggest-accept
 
 reload_rc() {
   echo "Reloading..."
-  src
+  source "${ZDOTDIR:-$HOME}/.zshrc"
   zle reset-prompt
 }
 
@@ -51,3 +49,5 @@ bindkey '^T' reload_rc
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*:commands" rehash 1
+
+cowsay -f stegosaurus "Welcome to the Squad"
