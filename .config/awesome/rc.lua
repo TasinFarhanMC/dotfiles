@@ -233,7 +233,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 	add_tag({ "8", "9" }, {
 		screen = s,
-		layout = awful.layout.suit.fullscreen,
+		layout = awful.layout.suit.max.fullscreen,
 	})
 
 	-- Create a promptbox for each screen
