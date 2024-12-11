@@ -193,11 +193,48 @@ local tasklist_buttons = gears.table.join(
 	end)
 )
 
+local function add_tag(names, props, indexes)
+	for i, name in ipairs(names) do
+		if indexes then
+			props.index = indexes[i]
+		else
+			props.index = tonumber(name)
+		end
+
+		awful.tag.add(name, props)
+	end
+end
+
 awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+	add_tag({ "1", "2" }, {
+		screen = s,
+		layout = awful.layout.suit.tile,
+		gap = 8,
+	})
+
+	add_tag({ "3" }, {
+		screen = s,
+		layout = awful.layout.suit.magnifier,
+		gap = 8,
+	})
+
+	add_tag({ "4", "5" }, {
+		screen = s,
+		layout = awful.layout.suit.floating,
+	})
+
+	add_tag({ "6", "7" }, {
+		screen = s,
+		layout = awful.layout.suit.max,
+	})
+
+	add_tag({ "8", "9" }, {
+		screen = s,
+		layout = awful.layout.suit.fullscreen,
+	})
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -531,17 +568,17 @@ awful.rules.rules = {
 
 	{
 		rule = { class = "floorp" },
-		properties = { screen = 1, tag = "3" },
+		properties = { screen = 1, tag = "4" },
 		callback = function()
-			screen[1].tags[3]:view_only()
+			screen[1].tags[4]:view_only()
 		end,
 	},
 
 	{
 		rule = { class = "UltimMC" },
-		properties = { screen = 1, tag = "8" },
+		properties = { screen = 1, tag = "6" },
 		callback = function()
-			screen[1].tags[8]:view_only()
+			screen[1].tags[6]:view_only()
 		end,
 	},
 }
@@ -618,6 +655,7 @@ local tasks = {
 	"picom",
 	"nm-applet",
 	"pnmixer",
+	"parcellite",
 }
 
 for _, task in ipairs(tasks) do
