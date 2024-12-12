@@ -5,6 +5,7 @@ conform.formatters_by_ft = {
   c = { "clang-format" },
   cpp = { "clang-format" },
   python = { "ruff_format" },
+  cmake = { "cmakelang" },
 }
 
 conform.format_on_save = {
