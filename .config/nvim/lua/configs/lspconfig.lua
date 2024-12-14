@@ -8,6 +8,7 @@ lspconfig.servers = {
   "pyright",
   "lua_ls",
   "cmake",
+  "bashls",
 }
 
 for _, lsp in ipairs(lspconfig.servers) do
