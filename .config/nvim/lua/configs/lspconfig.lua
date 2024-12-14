@@ -53,5 +53,6 @@ lspconfig.clangd.setup {
     "--completion-style=detailed",
     "--clang-tidy",
     "--log=verbose",
+    "--compile-commands-dir=.",
   },
 }

@@ -1,21 +1,16 @@
-local conform = require "conform"
+return {
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "ruff_format" },
+  },
 
-conform.formatters_by_ft = {
-  lua = { "stylua" },
-  c = { "clang-format" },
-  cpp = { "clang-format" },
-  python = { "ruff_format" },
-  cmake = { "cmakelang" },
+  default_format_opts = { lsp_format = "fallback" },
+  format_on_save = { timeout_ms = 500 },
 }
 
-conform.format_on_save = {
-  timeout_ms = 500,
-  lsp_fallback = true,
-}
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    conform.format()
-  end,
-})
+--vim.api.nvim_create_autocmd("BufWritePre", {
+--  pattern = "*",
+--  callback = function()
+--    conform.format()
+--  end,
+--})

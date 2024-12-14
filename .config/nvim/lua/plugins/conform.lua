@@ -1,10 +1,9 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre",
-    config = function()
-      require "configs.conform"
-    end,
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    opts = require "configs.conform"
   },
 
   {
