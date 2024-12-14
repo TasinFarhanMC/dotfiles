@@ -2,6 +2,9 @@ return {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "ruff_format" },
+    sh = { "shfmt" },
+    bash = { "shfmt" },
+    zsh = { "shfmt" },
   },
 
   default_format_opts = { lsp_format = "fallback" },

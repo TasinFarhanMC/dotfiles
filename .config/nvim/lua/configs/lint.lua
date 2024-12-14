@@ -3,6 +3,9 @@ local lint = require "lint"
 lint.linters_by_ft = {
   lua = { "luacheck" },
   python = { "ruff" },
+  sh = { "shellcheck" },
+  bash = { "shellcheck" },
+  zsh = { "shellcheck" },
 }
 
 lint.linters.luacheck.args = {
