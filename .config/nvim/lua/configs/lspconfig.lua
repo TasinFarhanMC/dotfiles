@@ -4,10 +4,8 @@ local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
 lspconfig.servers = {
-  "clangd",
   "pyright",
-  "lua_ls",
-  "cmake",
+  --"cmake",
   "bashls",
 }
 

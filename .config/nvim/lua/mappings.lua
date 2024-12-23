@@ -1,27 +1,18 @@
 require "nvchad.mappings"
 
--- add yours here
-
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
+map(
+  "i",
+  "<M-Space>",
+  "<Cmd>lua require('cmp').complete()<CR>",
+  { desc = "Trigger completion" }
+)
 
-local function get_dir()
-  local str = debug.getinfo(2, "S").source:sub(2)
-  return str:match "(.*/)"
+if os.getenv "TMUX" then
+  map({ "n", "i", "v" }, "<C-h>", "<cmd> TmuxNavigateLeft <cr>")
+  map({ "n", "i", "v" }, "<C-j>", "<cmd> TmuxNavigateDown <cr>")
+  map({ "n", "i", "v" }, "<C-k>", "<cmd> TmuxNavigateUp <cr>")
+  map({ "n", "i", "v" }, "<C-l>", "<cmd> TmuxNavigateRight <cr>")
 end
-
-local function require_dir(dir)
-  local p = io.popen('ls "' .. get_dir() .. dir .. '"')
-  for file in p:lines() do
-    if file:sub(-4) == ".lua" then
-      local moduleName = file:sub(1, -5) -- Remove `.lua` extension
-      require(dir:gsub("/", ".") .. "." .. moduleName)
-    end
-  end
-  p:close()
-end
-
-require_dir "mappings"
-
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
