@@ -6,7 +6,7 @@ gp() {
 }
 
 clip() {
-  cat $1 | xclip -selection clipboard
+  xclip -selection clipboard <"$1"
 }
 
 alias ls='lsd'

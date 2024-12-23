@@ -12,17 +12,17 @@ setopt hist_save_no_dups
 setopt hist_find_no_dups
 
 if [[ ! -d $ZINIT_HOME ]]; then
-  mkdir -p $(dirname $ZINIT_HOME)
-  git clone https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "$ZINIT_HOME/zinit.zsh"
 source "${ZDOTDIR:-$HOME}/alias.zsh"
 source "/usr/share/wikiman/widgets/widget.zsh"
 
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
+zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
+zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1; zinit light zsh-users/zsh-completions
 zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 eval "$(zoxide init --cmd cd zsh)"
