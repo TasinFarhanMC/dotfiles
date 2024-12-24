@@ -32,7 +32,7 @@ eval "$(thefuck --alias f)"
 bindkey -v
 bindkey -M viins '^z' history-search-backward
 bindkey -M viins '^x' history-search-forward
-bindkey '\x1b[Z' autosuggest-accept
+bindkey '^[ ' autosuggest-accept
 
 autoload -U compinit && compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 
