@@ -7,6 +7,7 @@ lspconfig.servers = {
   "pyright",
   --"cmake",
   "bashls",
+  "asm_lsp",
 }
 
 for _, lsp in ipairs(lspconfig.servers) do
@@ -52,6 +53,5 @@ lspconfig.clangd.setup {
     "--completion-style=detailed",
     "--clang-tidy",
     "--log=verbose",
-    "--compile-commands-dir=.",
   },
 }
