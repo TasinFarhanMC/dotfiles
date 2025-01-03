@@ -5,6 +5,7 @@ return {
     sh = { "shfmt" },
     bash = { "shfmt" },
     zsh = { "shfmt" },
+    asm = { "asmfmt" },
   },
 
   default_format_opts = { lsp_format = "fallback" },
