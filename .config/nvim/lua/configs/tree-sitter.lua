@@ -12,6 +12,10 @@ require("nvim-treesitter.configs").setup {
     "c",
     "cpp",
     "python",
+    "typescript",
+    "javascript",
+    "scss",
+    "svelte",
   },
 
   highlight = {

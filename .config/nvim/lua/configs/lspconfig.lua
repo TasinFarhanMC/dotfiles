@@ -5,9 +5,13 @@ local nvlsp = require "nvchad.configs.lspconfig"
 
 lspconfig.servers = {
   "pyright",
-  --"cmake",
+  "cmake",
   "bashls",
   "asm_lsp",
+  "svelte",
+  "ts_ls",
+  "html",
+  "cmake",
 }
 
 for _, lsp in ipairs(lspconfig.servers) do

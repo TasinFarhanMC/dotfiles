@@ -6,6 +6,11 @@ return {
     bash = { "shfmt" },
     zsh = { "shfmt" },
     asm = { "asmfmt" },
+    css = { "prettier" },
+    scss = { "prettier" },
+    js = { "prettier" },
+    ts = { "prettier" },
+    cmake = { "cmake_format" },
   },
 
   default_format_opts = { lsp_format = "fallback" },

@@ -566,13 +566,13 @@ awful.rules.rules = {
 		properties = { titlebars_enabled = true },
 	},
 
-	{
-		rule = { class = "floorp" },
-		properties = { screen = 1, tag = "4" },
-		callback = function()
-			screen[1].tags[4]:view_only()
-		end,
-	},
+	-- {
+	-- 	rule = { class = "floorp" },
+	-- 	properties = { screen = 1, tag = "4" },
+	-- 	callback = function()
+	-- 		screen[1].tags[4]:view_only()
+	-- 	end,
+	-- },
 
 	{
 		rule = { class = "UltimMC" },
