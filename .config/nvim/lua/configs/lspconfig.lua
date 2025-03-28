@@ -12,6 +12,7 @@ lspconfig.servers = {
   "ts_ls",
   "html",
   "cmake",
+  "rust_analyzer",
 }
 
 for _, lsp in ipairs(lspconfig.servers) do
