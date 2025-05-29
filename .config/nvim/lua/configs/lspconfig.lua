@@ -13,6 +13,7 @@ lspconfig.servers = {
   "html",
   "cmake",
   "rust_analyzer",
+  "arduino_language_server",
 }
 
 for _, lsp in ipairs(lspconfig.servers) do

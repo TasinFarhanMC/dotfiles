@@ -10,3 +10,6 @@ export WALLPAPER_DIR="$HOME/backgrounds"
 export CARGO_HOME="$HOME/cargo"
 export RUSTUP_HOME="$HOME/rustup"
 export PATH="$CARGO_HOME/bin:$PATH"
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus

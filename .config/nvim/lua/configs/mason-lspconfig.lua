@@ -1,6 +1,9 @@
 local lspconfig = package.loaded["lspconfig"]
 
-local ignore_install = {}
+local ignore_install = {
+  "clangd",
+  "arduino_language_server",
+}
 
 local function table_contains(table, value)
   for _, v in ipairs(table) do
