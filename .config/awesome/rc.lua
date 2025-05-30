@@ -288,9 +288,9 @@ awful.screen.connect_for_each_screen(function(s)
 			s.mylayoutbox,
 		},
 	})
-
-	awful.tag.viewonly(s.tags[1])
 end)
+
+awful.tag.viewonly(awful.screen.focused().tags[1])
 -- }}}
 
 -- {{{ Mouse bindings
@@ -659,7 +659,6 @@ local tasks = {
 	"pnmixer",
 	"parcellite",
 	"flameshot",
-	"ibus-deamon",
 }
 
 for _, task in ipairs(tasks) do
