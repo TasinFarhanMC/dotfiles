@@ -16,3 +16,10 @@ if os.getenv "TMUX" then
   map({ "n", "i", "v" }, "<C-k>", "<cmd> TmuxNavigateUp <cr>")
   map({ "n", "i", "v" }, "<C-l>", "<cmd> TmuxNavigateRight <cr>")
 end
+
+map(
+  "n",
+  "<leader>ca",
+  vim.lsp.buf.code_action,
+  { desc = "Code Actions", silent = true }
+)

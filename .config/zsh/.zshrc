@@ -41,3 +41,6 @@ zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*:commands" rehash 1
 
 #cowsay -f stegosaurus "Domain Initialized"
+
+# bun completions
+[ -s "/home/tasin/.bun/_bun" ] && source "/home/tasin/.bun/_bun"

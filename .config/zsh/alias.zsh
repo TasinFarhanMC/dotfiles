@@ -1,8 +1,16 @@
-gp() {
+gtc() {
   git add .
   git commit -m "$1"
+}
+
+gtp() {
+  gtc "$1"
   git pull
   git push -f
+}
+
+nvd() {
+  DIR="$(zoxide query "$1")" && nvim -c "cd ${DIR}"
 }
 
 clip() {

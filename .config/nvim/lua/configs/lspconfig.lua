@@ -14,6 +14,8 @@ lspconfig.servers = {
   "cmake",
   "rust_analyzer",
   "arduino_language_server",
+  "java_language_server",
+  "kotlin_language_server",
 }
 
 for _, lsp in ipairs(lspconfig.servers) do
