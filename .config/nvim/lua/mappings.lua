@@ -1,25 +1,13 @@
 require "nvchad.mappings"
 
+-- add yours here
+
+local unmap = vim.keymap.del
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map(
-  "i",
-  "<M-Space>",
-  "<Cmd>lua require('cmp').complete()<CR>",
-  { desc = "Trigger completion" }
-)
+map("i", "jk", "<ESC>")
+map("i", "<M-Space>", require("cmp").complete, { desc = "Trigger completion" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
 
-if os.getenv "TMUX" then
-  map({ "n", "i", "v" }, "<C-h>", "<cmd> TmuxNavigateLeft <cr>")
-  map({ "n", "i", "v" }, "<C-j>", "<cmd> TmuxNavigateDown <cr>")
-  map({ "n", "i", "v" }, "<C-k>", "<cmd> TmuxNavigateUp <cr>")
-  map({ "n", "i", "v" }, "<C-l>", "<cmd> TmuxNavigateRight <cr>")
-end
-
-map(
-  "n",
-  "<leader>ca",
-  vim.lsp.buf.code_action,
-  { desc = "Code Actions", silent = true }
-)
+-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

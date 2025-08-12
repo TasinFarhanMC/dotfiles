@@ -3,20 +3,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
-lspconfig.servers = {
-  "pyright",
-  "cmake",
-  "bashls",
-  "asm_lsp",
-  "svelte",
-  "ts_ls",
-  "html",
-  "cmake",
-  "rust_analyzer",
-  "arduino_language_server",
-  "java_language_server",
-  "kotlin_language_server",
-}
+lspconfig.servers = require("configs.lsps").servers
 
 for _, lsp in ipairs(lspconfig.servers) do
   lspconfig[lsp].setup {
@@ -52,14 +39,16 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.clangd.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  cmd = {
-    "clangd",
-    "--completion-style=detailed",
-    "--clang-tidy",
-    "--log=verbose",
-  },
-}
+-- lspconfig.clangd.setup {
+--   on_attach = nvlsp.on_attach,
+--   on_init = nvlsp.on_init,
+--   capabilities = nvlsp.capabilities,
+--   cmd = {
+--     "clangd",
+--     "--completion-style=detailed",
+--     "--clang-tidy",
+--     "--log=verbose",
+--   },
+-- }
+--
+--

@@ -31,7 +31,7 @@ return {
         "spellfile_plugin",
         "vimball",
         "vimballPlugin",
-        "zip",
+        -- "zip",
         "zipPlugin",
         "tutor",
         "rplugin",
