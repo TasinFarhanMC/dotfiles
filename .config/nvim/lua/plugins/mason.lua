@@ -14,4 +14,12 @@ return {
       ignore_install = require("configs.conform").ignore_install,
     },
   },
+  {
+    "rshkarin/mason-nvim-lint",
+    event = "VeryLazy",
+    dependencies = { "mason.nvim", "nvim-lint" },
+    opts = {
+      automatic_installation = true,
+    },
+  },
 }

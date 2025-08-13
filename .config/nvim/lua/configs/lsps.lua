@@ -1,15 +1,37 @@
 local servers = {
-  "pyright",
-  "cmake",
-  "bashls",
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          enable = false,
+          globals = { "vim" },
+        },
+        workspace = {
+          library = {
+            vim.fn.expand "$VIMRUNTIME/lua",
+            vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
+            vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
+            vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
+            "${3rd}/love2d/library",
+          },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
+        },
+      },
+    },
+  },
+
+  clangd = {},
+
+  pyright = {},
+  cmake = {},
+  bashls = {},
+  svelte = {},
+  ts_ls = {},
+  html = {},
+  rust_analyzer = {},
+  arduino_language_server = {},
   -- "asm_lsp",
-  "svelte",
-  "ts_ls",
-  "html",
-  "cmake",
-  "rust_analyzer",
-  "arduino_language_server",
-  "clangd",
   -- "eslint",
   -- "java_language_server",
   -- "kotlin_language_server",
@@ -28,9 +50,9 @@ local function subtract_tables(a, b)
   end
 
   local result = {}
-  for _, v in ipairs(a) do
-    if not b_set[v] then
-      table.insert(result, v)
+  for k, _ in pairs(a) do
+    if not b_set[k] then
+      table.insert(result, k)
     end
   end
   return result
