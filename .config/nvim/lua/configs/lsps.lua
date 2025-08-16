@@ -23,6 +23,7 @@ local servers = {
 
   clangd = {},
 
+  astro = {},
   pyright = {},
   cmake = {},
   bashls = {},
