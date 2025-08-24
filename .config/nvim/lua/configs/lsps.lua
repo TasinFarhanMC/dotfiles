@@ -23,6 +23,7 @@ local servers = {
 
   clangd = {},
 
+  jsonls = {},
   astro = {},
   pyright = {},
   cmake = {},
