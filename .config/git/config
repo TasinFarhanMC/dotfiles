@@ -1,13 +1,16 @@
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [user]
 	email = tasinfarhan1016@gmail.com
-  name = TasinFarhanMC
+	name = Tasin Farhan
+	signingkey = /home/tasin/.ssh/id_ed25519.pub
 [init]
   defaultBranch = main
 [push]
   autoSetupRemote = true
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true

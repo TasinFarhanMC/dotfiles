@@ -1,4 +1,5 @@
 export EDITOR=nvim
+export VISUAL=nvim
 export TERMINAL=kitty
 export QT_QPA_PLATFORMTHEME="qt6ct"
 export WINEPREFIX="$HOME/wine"

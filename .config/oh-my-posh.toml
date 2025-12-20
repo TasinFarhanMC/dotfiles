@@ -1,5 +1,5 @@
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
-version = 3
+version = 4
 final_space = true
 
 [palette]
@@ -32,7 +32,7 @@ final_space = true
     type = 'path'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       cache_duration = 'none'
       style = 'full'
 
@@ -43,7 +43,7 @@ final_space = true
     type = 'git'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       branch_icon = ''
       cache_duration = 'none'
       commit_icon = '@'
@@ -59,7 +59,7 @@ final_space = true
     type = 'time'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       cache_duration = 'none'
       time_format = '3:04:05 PM Mon'
 
@@ -75,7 +75,7 @@ final_space = true
     style = 'plain'
     foreground_templates = ['{{if gt .Code 0}}p:red{{end}}', '{{if eq .Code 0}}p:green{{end}}']
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       cache_duration = 'none'
 
 [[blocks]]
@@ -89,6 +89,6 @@ final_space = true
     type = 'executiontime'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       cache_duration = 'none'
       threshold = 5000

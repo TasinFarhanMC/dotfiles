@@ -23,15 +23,13 @@ source "/usr/share/wikiman/widgets/widget.zsh"
 zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light zsh-users/zsh-completions
-zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-posh.toml)"
 eval "$(thefuck --alias f)"
 
-bindkey -v
-bindkey -M viins '^z' history-search-backward
-bindkey -M viins '^x' history-search-forward
+bindkey  '^z' history-search-backward
+bindkey  '^x' history-search-forward
 bindkey '^[ ' autosuggest-accept
 
 autoload -U compinit && compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
@@ -44,3 +42,7 @@ zstyle ":completion:*:commands" rehash 1
 
 # bun completions
 [ -s "/home/tasin/.bun/_bun" ] && source "/home/tasin/.bun/_bun"
+if [[ -f "/usr/lib/emsdk/emsdk_env.sh" ]]; then
+   export EMSDK_QUIET=1
+   source "/usr/lib/emsdk/emsdk_env.sh" 
+fi
