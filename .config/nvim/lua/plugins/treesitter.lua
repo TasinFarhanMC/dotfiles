@@ -1,7 +1,12 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  opts = {
-    ensure_installed = {
+  lazy = false,
+  build = ":TSUpdate",
+
+  config = function()
+    local ts = require "nvim-treesitter"
+
+    ts.install({
       "vim",
       "lua",
       "vimdoc",
@@ -16,6 +21,9 @@ return {
       "yaml",
       "json",
       "toml",
-    },
-  },
+    }, {
+      force = false,
+      summary = false,
+    })
+  end,
 }
