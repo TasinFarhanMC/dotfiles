@@ -22,7 +22,6 @@ local servers = {
   },
 
   clangd = {},
-
   jsonls = {},
   astro = {},
   pyright = {},
@@ -33,7 +32,10 @@ local servers = {
   html = {},
   rust_analyzer = {},
   arduino_language_server = {},
-  -- "asm_lsp",
+  asm_lsp = {},
+  glsl_analyzer = {},
+  dotls = {},
+  -- glslls = {},
   -- "eslint",
   -- "java_language_server",
   -- "kotlin_language_server",
@@ -43,6 +45,8 @@ local ignore_install = {
   "clangd",
   "rust_analyzer",
   "arduino_language_server",
+  "asm_lsp",
+  "glsl_analyzer",
 }
 
 local function subtract_tables(a, b)

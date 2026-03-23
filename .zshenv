@@ -11,6 +11,7 @@ export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 
 export CARGO_HOME="$HOME/cargo"
+export CARGO_TARGET_DIR="$HOME/.cache/cargo-target"
 export RUSTUP_HOME="$HOME/rustup"
 export BUN_INSTALL="$HOME/.bun"
 export CPM_SOURCE_CACHE=$HOME/.cache/CPM
