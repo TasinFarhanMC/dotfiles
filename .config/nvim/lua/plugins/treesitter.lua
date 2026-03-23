@@ -21,6 +21,7 @@ return {
       "yaml",
       "json",
       "toml",
+      "dot",
     }, {
       force = false,
       summary = false,
