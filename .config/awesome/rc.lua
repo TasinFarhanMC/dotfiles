@@ -659,6 +659,7 @@ local tasks = {
 	"pnmixer",
 	"parcellite",
 	"flameshot",
+	"blueman-applet",
 }
 
 for _, task in ipairs(tasks) do
