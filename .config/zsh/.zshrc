@@ -4,6 +4,7 @@ HISTDUP=erase
 HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh_history"
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 
+setopt interactivecomments
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
