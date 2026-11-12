@@ -5,7 +5,7 @@ gtc() {
 
 gtp() {
   gtc "$1"
-  git pull
+  git pull --rebase
   git push -f
 }
 
